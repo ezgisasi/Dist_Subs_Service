@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package Message;
+
+message DemandMessage {
+  string demand = 1;
+  string response = 2;
+}
