@@ -39,7 +39,7 @@ public class Client1 {
             } else if ("2".equalsIgnoreCase(choice)) {
 
                 SubscriberOuterClass.Subscriber cancelRequest = SubscriberOuterClass.Subscriber.newBuilder()
-                        .setID(1001)
+                        .setID(1)
                         .setDemand(SubscriberOuterClass.Subscriber.Demand.DEL)
                         .build();
 
