@@ -93,3 +93,7 @@ javac -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>.java
 java -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>
 
 
+
+![sist](https://github.com/user-attachments/assets/13d17246-98e3-4dd7-a0a9-c33d38bf3b5f)
+
+![sistem](https://github.com/user-attachments/assets/5a5dc4f2-2341-4034-9a26-47c26d7042e1)
