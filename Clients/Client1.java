@@ -24,10 +24,8 @@ public class Client1 {
                         .setID(1)
                         .setNameSurname("Elanur İmirgi")
                         .setStartDate(System.currentTimeMillis() / 1000L) 
-                        .setLastAccessed(System.currentTimeMillis() / 1000L) 
-                        .addInterests("teknoloji")
+                        .setLastAccessed(System.currentTimeMillis() / 1000L)
                         .addInterests("spor")
-                        .addInterests("müzik")
                         .setIsOnline(true)
                         .setDemand(SubscriberOuterClass.Subscriber.Demand.SUBS)
                         .build();
