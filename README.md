@@ -61,6 +61,13 @@ isOnline : // null olabilir
 
 İlk aşamada demand tiplerinden abone olmak anlamına gelen SUBS; abonelikten çıkmak anlamına gelen DEL aşamalarını gerçekleyiniz.
 
+![sist](https://github.com/user-attachments/assets/065e1792-6fec-43bb-8e4c-eb2c709501ff)
+
+
+![sistem](https://github.com/user-attachments/assets/832f142f-9ed0-4df4-84c2-a9b4947298bf)
+
+
+
 
 ## Derleme ve Çalıştırma Aşamaları
 
@@ -91,9 +98,3 @@ Java Client Çalıştırma
 cd Clients
 javac -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>.java
 java -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>
-
-
-
-![sist](https://github.com/user-attachments/assets/13d17246-98e3-4dd7-a0a9-c33d38bf3b5f)
-
-![sistem](https://github.com/user-attachments/assets/5a5dc4f2-2341-4034-9a26-47c26d7042e1)
