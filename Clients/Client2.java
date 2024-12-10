@@ -6,7 +6,7 @@ import src.main.java.subscriber.SubscriberOuterClass;
 
 public class Client2 {
     private static final String LOCAL_HOST = "localhost";
-    private static final int PORT = 5001;
+    private static final int PORT = 5002;
 
     public static void main(String[] args) {
         try (Socket clientSocket = new Socket(LOCAL_HOST, PORT);
