@@ -1,43 +1,34 @@
 # Dağıtık Abonelik Sistemi (Distributed Subscriber Service)
-Bu dosya üzerinden projede gerçeklediklerinizi izah ediniz.
 
+Bu proje, dağıtık bir abonelik sistemi oluşturmak amacıyla geliştirilmiştir. Sistem, sunucular, istemciler, yönetim paneli ve Protobuf kullanılarak tasarlanmış olup, işlevsellik ve dosya detayları aşağıda açıklanmıştır.
 
-izah izah izah izah izah izah izah izah izah izah izah izah izah 
-izah izah izah izah izah izah izah izah izah izah izah izah izah 
+## Derleme ve Çalıştırma Aşamaları
 
+### Protobuf Derleme
 
-### plotter.py Solar System Exploration, 1950s – 1960s
+**Sunucular (Java) için:**
+```bash
+cd dist_servers
+protoc --java_out=. <Proto Dosya İsmi>.proto
 
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+Yönetim Paneli (Ruby) için:
+cd panel
+protoc --ruby_out=. <Proto Dosya İsmi>.proto
 
-### admin.rb Solar System Exploration, 1950s – 1960s
+Java Dosyalarını Derleme
+cd dist_servers
+javac -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" *.java
 
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+Java Dosyalarını Çalıştırma
+cd dist_servers
+java -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Server adı>
 
-### ServerX.java Solar System Exploration, 1950s – 1960s
+Ruby Admin Panelini Çalıştırma
+cd panel
+ruby admin.rb
 
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+Java Client Çalıştırma
+cd Clients
+javac -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>.java
+java -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>
+
