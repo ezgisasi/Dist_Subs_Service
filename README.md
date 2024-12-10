@@ -1,6 +1,6 @@
 # Dağıtık Abonelik Sistemi (Distributed Subscriber Service)
 
-Bu proje, dağıtık bir abonelik sistemi oluşturmak amacıyla geliştirilmiştir. Sistem, sunucular, istemciler, yönetim paneli ve Protobuf kullanılarak tasarlanmış olup, işlevsellik ve dosya detayları aşağıda açıklanmıştır.
+Bu proje, dağıtık bir abonelik sistemi oluşturmak amacıyla geliştirilmiştir. Sistem, sunucular, istemciler, yönetim paneli ve Protobuf kullanılarak tasarlanmış olup, dosya çalıştırma detayları aşağıda açıklanmıştır.
 
 ## Derleme ve Çalıştırma Aşamaları
 
