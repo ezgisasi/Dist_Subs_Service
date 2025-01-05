@@ -1,9 +1,9 @@
 # Dağıtık Abonelik Sistemi (Distributed Subscriber Service)
 
-Bu proje, **Hata-Tolere Abonelik Servisi Uyelik Protokolü (HASUP)** adı verilen sınıf tabanlı ilkel bir protokol kullanılarak, dağıtık ve hata toleranslı bir abonelik sistemi geliştirmeyi hedefler. Proje kapsamında sunucular arası haberleşmede **Protobuf** teknolojisi ile veri alışverişi sağlanmıştır. Özellikle hata tolerans seviyesine dayalı özgün sunucu tercihleri ve işleyiş yöntemleri ile sistemin güvenilirliği artırılmıştır.
+Bu projede, Ruby, Python ve Java programlama dilleri kullanılarak, Taşıma (Transport) Katmanı üzerinde dağıtık, hata toleransına sahip bir abonelik sistemi geliştirmemiz beklenmektedir. Bu sistem, soket üzerinden ödeve özgü olarak tasarlanmış, sınıf tabanlı ve ilkel bir protokol olan HASUP (Hata-Tolere Abonelik Servisi Üyelik Protokolü) ile çalışacaktır. HASUP protokolü, belirlenen sıraya uygun şekilde işlem gerçekleştirmelidir. Dağıtık mimaride tasarlanan bu sistem, yük dengeleme ve hata toleransı gibi gereksinimlere yanıt vermelidir. Her bir sunucu, kendi bünyesinde abone bilgilerini tutarken, istemcilerin bir sunucudan abone olup, başka bir sunucudan sisteme giriş yapabilmesine olanak tanıyacaktır. Eşzamanlı istemci erişimlerinde, her bir sunucunun thread-safe bir yapıyla çalışarak, kendi veri yapılarına güvenli erişim sağlaması gerekmektedir.
 
-## Sunucu Özellikleri (ServerX.java)
-- **Başlatma:** `admin_client.rb` aracılığıyla başlatılabilir.
+## ServerX.java özellikleri
+- **Başlatma:** `admin.rb` aracılığıyla başlatılabilir.
 - **Hata Toleransı:** Hata toleransı 1 prensibiyle çalışmaktadır (1 sunucu hata verdiğinde hizmet devam eder).
 - **Protokol Desteği:** HASUP protokolü kullanılarak abonelik işlemleri gerçekleştirilir.
 - **Protobuf Tabanlı Haberleşme:** 
@@ -21,7 +21,7 @@ Bu proje, **Hata-Tolere Abonelik Servisi Uyelik Protokolü (HASUP)** adı verile
 - **Veri Güncellemesi:** Kapasite bilgilerini 5 saniyede bir günceller.
 - **Sunucu Renk Kodlaması:** Her sunucu için ayrı bir renk ile bilgi aktarımı sağlar.
 
-## admin_client.rb Özellikleri
+## admin.rb Özellikleri
 - **Konfigürasyon:** 
   - `dist_subs.conf` dosyasını okuyarak sunucuları başlatır.
   - Hata toleransı seviyesi ve başlangıç ayarlarını sunuculara iletir.
