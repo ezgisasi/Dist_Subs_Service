@@ -1,100 +1,51 @@
 # Dağıtık Abonelik Sistemi (Distributed Subscriber Service)
 
-Bu proje, dağıtık bir abonelik sistemi oluşturmak amacıyla geliştirilmiştir. Sistem, sunucular, istemciler, yönetim paneli ve Protobuf kullanılarak tasarlanmış olup, örnek bir akış, sistem görselleri ve dosya çalıştırma detayları aşağıda açıklanmıştır.
+Bu proje, **Hata-Tolere Abonelik Servisi Uyelik Protokolü (HASUP)** adı verilen sınıf tabanlı ilkel bir protokol kullanılarak, dağıtık ve hata toleranslı bir abonelik sistemi geliştirmeyi hedefler. Proje kapsamında sunucular arası haberleşmede **Protobuf** teknolojisi ile veri alışverişi sağlanmıştır. Özellikle hata tolerans seviyesine dayalı özgün sunucu tercihleri ve işleyiş yöntemleri ile sistemin güvenilirliği artırılmıştır.
 
-## Örnek Bir Akış
-Server1.java, Server2.java ve Server3.java sırasıyla koşturulup, kendi aralarında TCP soketleri ile “connection” oluşturmalıdır. Bu olaydan 6 adet connection meydana gelmelidir. (TCP connection oluşturmak için herhangi bir gönderime gerek olmadığını hatırlayınız.)
+## Sunucu Özellikleri (ServerX.java)
+- **Başlatma:** `admin_client.rb` aracılığıyla başlatılabilir.
+- **Hata Toleransı:** Hata toleransı 1 prensibiyle çalışmaktadır (1 sunucu hata verdiğinde hizmet devam eder).
+- **Protokol Desteği:** HASUP protokolü kullanılarak abonelik işlemleri gerçekleştirilir.
+- **Protobuf Tabanlı Haberleşme:** 
+  - **Subscriber Nesnesi:** Abonelik bilgilerini içerir.
+  - **Capacity Nesnesi:** Sunucu doluluk bilgilerini içerir.
+  - **Configuration Nesnesi:** Yönetici tarafından gönderilen başlangıç ayarlarını taşır.
+- **Eşzamanlılık:** Eşzamanlı istemci erişimleri için thread-safe veri yönetimi sağlanır.
+- **Port Kullanımı:** 
+  - Sunucular arası haberleşme: 5001, 5002, 5003
+  - İstemci ile haberleşme: 6001, 6002, 6003
+  - Admin istemci ile haberleşme: 7001, 7002, 7003
 
-admin.rb, kendisi ile aynı dizinde bulunan “dist_subs.conf” dosyasını okuyup; Server1.java, Server2.java, Server3.java’ ya başlama “STRT” emrini verir. dist_subs.conf dosyasının içerisinde şimdilik sadece tek satırlık “fault_tolerance_level = X” değişkeni bulunmalıdır. Dosyadan hata tolerans seviyesi okunup Configuration sınıfından bir nesne construct edilmelidir. Configuration sınıfından türetilecek nesnenin setlenecek özellikleri:
+## admin_client.rb Özellikleri
+- **Konfigürasyon:** 
+  - `dist_subs.conf` dosyasını okuyarak sunucuları başlatır.
+  - Hata toleransı seviyesi ve başlangıç ayarlarını sunuculara iletir.
+- **Kapasite Kontrolü:** 5 saniyede bir sunucuların doluluk oranlarını sorgular.
+- **Yönetim:** Başarı ve hata durumlarını kontrol eder, gerekli işlemleri başlatır.
 
-fault_tolerance_level = 1 
-method = STRT
+## plotter.py Özellikleri
+- **Grafiksel Görselleştirme:** Sunucu doluluk oranlarını anlık olarak grafik ile gösterir.
+- **Veri Güncellemesi:** Kapasite bilgilerini 5 saniyede bir günceller.
+- **Sunucu Renk Kodlaması:** Her sunucu için ayrı bir renk ile bilgi aktarımı sağlar.
 
-Server1.java, Server2.java, Server3.java sunucuları, admin.rb tarafından gelen bu isteğin başarılı ve başarısız sonuçlandığına dair Message tipinde bir nesne göndermelidir. Message nesnesine ait alanların setlenmesi:
+## Abonelik İşlemleri
+1. **Abone Olma (SUBS):** İstemciden gelen abonelik taleplerini işler.
+2. **Giriş Yapma (ONLN):** Abonenin çevrimiçi durumunu günceller.
+3. **Çıkış Yapma (OFFL):** Abonenin çevrimdışı durumunu günceller.
+4. **Silme (DEL):** Abonenin sistemden silinmesini sağlar.
 
-demand = STRT 
-response = YEP
+## Özgün Katkılar
+- Hata toleransı 1 ve 2 prensiplerine uygun şekilde özgün sunucu tercihleri tasarlanmıştır.
+- Protobuf kullanılarak sunucular arası veri iletişimi optimize edilmiştir.
+- Sistemin genişletilebilirliği ve güvenilirliği artırılmıştır.
 
-veya
-
-	demand = STRT 
-response = NOP
-
-admin.rb, 3. adımdaki başlat emrine karşın sunuculardan gelen dönütlere yani Message nesnelerine bakar. “response = YEP” olarak dönen sunuculara 5 sn’ de bir kapasite doluluklarını sorar. Sorgu işlemi için de Message tipinde bir nesne, sunuculara gönderilmelidir. Message nesnesine ait alanların setlenmesi:
-
-İstek atılan Message nesnesi:
-demand = CPCTY 
-response = null
-
-Server1’ den gelebilecek Capacity nesnesi cevabı:
-server1_status : 1000
-timestamp : 1729807522
-
-Server2’ den gelebilecek Capacity nesnesi cevabı:
-server2_status : 1000
-timestamp : 1729807524
-
-Server3’ ten gelebilecek Capacity nesnesi cevabı:
-server3_status : 1000
-timestamp : 1729807526
-
-Server1.java, Server2.java, Server3.java sunucularına, admin.rb tarafından 5 sn.’ de bir atılan kapasite isteklerine karşın cevap aldığı Capacity tipindeki bir nesneleri plotter.py sunucusuna göndermelidir. plotter.py sunucusu anlık olarak doluluk miktarlarını aşağıdaki gibi veya benzer bir şekilde plot etmelidir. Grafikte hangi rengin kaç numaralı sunucuya ait olduğu bilgisi de gösterilmelidir. 
-
-
-İlk aşamada Server1.java, Server2.java ve Server3.java sunucuları “fault_tolerance_level = 1” olarak seçildiğinde hizmet verebiliyor olmalıdır. İstemcilerden gelebilecek talepler Subscriber sınıfından inşa edilmiş bir nesne şeklinde olacaktır. Abone olma ve abonelikten çıkma Subscriber nesnesi örneği:
-
-demand = SUBS //demand types SUBS, DEL, UPDT, ONLN, OFFL
-ID : 12 
-name_surname : “Jane DOE” 
-start_date : 1729802522
-last_accessed : 1729806522 
-interests : [“sports”, “lifestyle”, “cooking”, “psychology”]
-isOnline : boolean 
-
-demand = DEL
-ID : 12 
-name_surname : // null olabilir
-start_date : // null olabilir
-last_accessed : // null olabilir
-interests : // null olabilir
-isOnline : // null olabilir
-
-İlk aşamada demand tiplerinden abone olmak anlamına gelen SUBS; abonelikten çıkmak anlamına gelen DEL aşamalarını gerçekleyiniz.
-
-![sist](https://github.com/user-attachments/assets/065e1792-6fec-43bb-8e4c-eb2c709501ff)
+## Ekip Üyeleri
+- **22060346, Ezgi Şaşı**
+- **22060360 Elanur İmirgi**
+- **22060330, Ayşenur Sunay**
 
 
-![sistem](https://github.com/user-attachments/assets/832f142f-9ed0-4df4-84c2-a9b4947298bf)
+## Sunum Videosu Linki
 
 
 
-
-## Derleme ve Çalıştırma Aşamaları
-
-### Protobuf Derleme
-
-**Sunucular (Java) için:**
-```bash
-cd dist_servers
-protoc --java_out=. <Proto Dosya İsmi>.proto
-
-Yönetim Paneli (Ruby) için:
-cd panel
-protoc --ruby_out=. <Proto Dosya İsmi>.proto
-
-Java Dosyalarını Derleme
-cd dist_servers
-javac -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" *.java
-
-Java Dosyalarını Çalıştırma
-cd dist_servers
-java -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Server adı>
-
-Ruby Admin Panelini Çalıştırma
-cd panel
-ruby admin.rb
-
-Java Client Çalıştırma
-cd Clients
-javac -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>.java
-java -cp ".;com/google/protobuf/protobuf-java-4.28.3.jar" <Client adı>
