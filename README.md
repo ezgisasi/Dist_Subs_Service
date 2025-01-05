@@ -16,6 +16,11 @@ Bu proje, **Hata-Tolere Abonelik Servisi Uyelik Protokolü (HASUP)** adı verile
   - İstemci ile haberleşme: 6001, 6002, 6003
   - Admin istemci ile haberleşme: 7001, 7002, 7003
 
+## plotter.py Özellikleri
+- **Grafiksel Görselleştirme:** Sunucu doluluk oranlarını anlık olarak grafik ile gösterir.
+- **Veri Güncellemesi:** Kapasite bilgilerini 5 saniyede bir günceller.
+- **Sunucu Renk Kodlaması:** Her sunucu için ayrı bir renk ile bilgi aktarımı sağlar.
+
 ## admin_client.rb Özellikleri
 - **Konfigürasyon:** 
   - `dist_subs.conf` dosyasını okuyarak sunucuları başlatır.
@@ -23,21 +28,11 @@ Bu proje, **Hata-Tolere Abonelik Servisi Uyelik Protokolü (HASUP)** adı verile
 - **Kapasite Kontrolü:** 5 saniyede bir sunucuların doluluk oranlarını sorgular.
 - **Yönetim:** Başarı ve hata durumlarını kontrol eder, gerekli işlemleri başlatır.
 
-## plotter.py Özellikleri
-- **Grafiksel Görselleştirme:** Sunucu doluluk oranlarını anlık olarak grafik ile gösterir.
-- **Veri Güncellemesi:** Kapasite bilgilerini 5 saniyede bir günceller.
-- **Sunucu Renk Kodlaması:** Her sunucu için ayrı bir renk ile bilgi aktarımı sağlar.
-
 ## Abonelik İşlemleri
 1. **Abone Olma (SUBS):** İstemciden gelen abonelik taleplerini işler.
 2. **Giriş Yapma (ONLN):** Abonenin çevrimiçi durumunu günceller.
 3. **Çıkış Yapma (OFFL):** Abonenin çevrimdışı durumunu günceller.
 4. **Silme (DEL):** Abonenin sistemden silinmesini sağlar.
-
-## Özgün Katkılar
-- Hata toleransı 1 ve 2 prensiplerine uygun şekilde özgün sunucu tercihleri tasarlanmıştır.
-- Protobuf kullanılarak sunucular arası veri iletişimi optimize edilmiştir.
-- Sistemin genişletilebilirliği ve güvenilirliği artırılmıştır.
 
 ## Ekip Üyeleri
 - **22060346, Ezgi Şaşı**
