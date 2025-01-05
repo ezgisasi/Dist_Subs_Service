@@ -2,6 +2,8 @@
 
 Bu projede, Ruby, Python ve Java programlama dilleri kullanılarak, Taşıma (Transport) Katmanı üzerinde dağıtık, hata toleransına sahip bir abonelik sistemi geliştirmemiz beklenmektedir. Bu sistem, soket üzerinden ödeve özgü olarak tasarlanmış, sınıf tabanlı ve ilkel bir protokol olan HASUP (Hata-Tolere Abonelik Servisi Üyelik Protokolü) ile çalışacaktır. HASUP protokolü, belirlenen sıraya uygun şekilde işlem gerçekleştirmelidir. Dağıtık mimaride tasarlanan bu sistem, yük dengeleme ve hata toleransı gibi gereksinimlere yanıt vermelidir. Her bir sunucu, kendi bünyesinde abone bilgilerini tutarken, istemcilerin bir sunucudan abone olup, başka bir sunucudan sisteme giriş yapabilmesine olanak tanıyacaktır. Eşzamanlı istemci erişimlerinde, her bir sunucunun thread-safe bir yapıyla çalışarak, kendi veri yapılarına güvenli erişim sağlaması gerekmektedir.
 
+Bu projede, dağıtık ve hata toleranslı bir abonelik sistemi geliştirmeyi hedeflemektedir. Ruby, Python ve Java kullanılarak, HASUP (Hata-Tolere Abonelik Servisi Uyelik Protokolü) isimli ilkel bir protokol ile abonelik işlemleri gerçekleştirilecektir. Sunucular (Server1, Server2, Server3), eşzamanlı istemci erişimlerini yönetirken Protobuf ile abone (Subscriber) ve yapılandırma (Configuration) nesnelerini alıp işlemelidir. Sistem, sunucuların doluluk oranlarını düzenli olarak admin istemciden sorgulayıp sonuçları plotter.py kullanarak görselleştirecektir.
+
 ## ServerX.java özellikleri
 - **Başlatma:** `admin.rb` aracılığıyla başlatılabilir.
 - **Hata Toleransı:** Hata toleransı 1 prensibiyle çalışmaktadır (1 sunucu hata verdiğinde hizmet devam eder).
