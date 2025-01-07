@@ -3,9 +3,9 @@
 Bu proje, **Sistem Programlama** dersi kapsamında geliştirilmiş bir **Dağıtık Abonelik Sistemi** uygulamasıdır. Projede, üç adet çok iş parçacıklı sunucu (multithreaded server) ve bir istemci sistemi kullanılarak hata-toleranslı bir abonelik hizmeti sunulmaktadır. Sistem, aşağıda açıklanan **HASUP (Hata-Tolere Abonelik Servisi Üyelik Protokolü)** ile çalışmaktadır.
 
 ## Özgün Katkılar
-Ela: Java Sunucu ve Dağıtık Sistem
-Ezgi: Admin ve Plotter İstemcileri
-Ayşenur: Client İşlemci ve Protobuf Tanımları
+-Ela: Java Sunucu ve Dağıtık Sistem,
+-Ezgi: Admin ve Plotter İstemcileri,
+-Ayşenur: Client İşlemci ve Protobuf Tanımları.
 
 ## Proje Özeti
 
