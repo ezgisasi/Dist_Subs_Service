@@ -31,15 +31,11 @@ Bu proje, TCP/IP soket programlama kullanılarak geliştirilmiştir ve dağıtı
   - **Capacity Nesnesi:** Sunucu doluluk bilgilerini içerir.
   - **Configuration Nesnesi:** Yönetici tarafından gönderilen başlangıç ayarlarını taşır.
 - **Eşzamanlılık:** Eşzamanlı istemci erişimleri için thread-safe veri yönetimi sağlanır.
-- **Port Kullanımı:** 
-  - Sunucular arası haberleşme: 5001, 5002, 5003
-  - İstemci ile haberleşme: 6001, 6002, 6003
-  - Admin istemci ile haberleşme: 7001, 7002, 7003
 
 ## plotter.py Özellikleri
-- **Grafiksel Görselleştirme:** Sunucu doluluk oranlarını anlık olarak grafik ile gösterir.
-- **Veri Güncellemesi:** Kapasite bilgilerini 5 saniyede bir günceller.
-- **Sunucu Renk Kodlaması:** Her sunucu için ayrı bir renk ile bilgi aktarımı sağlar.
+-"Sunucu doluluk oranlarını anlık olarak grafik ile gösterir, kapasite bilgilerini 5 saniyede bir günceller,
+her sunucu için ayrı bir renk ile bilgi aktarımı sağlar" istenmektedir fakat yaşanan problemlerden ötürü grafikte
+görselleştirme yapılamamıştır.
 
 ## admin.rb Özellikleri
 - **Konfigürasyon:** 
